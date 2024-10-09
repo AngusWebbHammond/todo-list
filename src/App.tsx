@@ -41,7 +41,7 @@ function App() {
         <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{todoCount}</span>
       </div>
       {/* Todo List Contents */}
-      <div className='bg-gray-200 dark:bg-slate-700'>
+      <div className='bg-gray-200 dark:bg-slate-700 min-h-20'>
         {data.map(({id, title, type}) => 
           <div key={id} className='bg-gray-200 dark:bg-slate-600 mb-0.5 rounded-md px-2'>
             <h3 className={h3TextStyling}>{title}</h3>
