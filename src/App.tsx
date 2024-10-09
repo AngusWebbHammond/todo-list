@@ -21,6 +21,26 @@ const defaultData = [
     id: "todo4",
     title: "Learn Tailwind CSS",
     type: "Todo",
+  },
+  {
+    id: "todo5",
+    title: "Add a Completed List",
+    type: "Todo",
+  },
+  {
+    id: "todo6",
+    title: "Style the Todo List",
+    type: "Completed",
+  },
+  {
+    id: "todo7",
+    title: "Add a Todo Counter",
+    type: "Completed",
+  },
+  {
+    id: "todo8",
+    title: "Add Sorting",
+    type: "Todo",
   }
 ]
 
