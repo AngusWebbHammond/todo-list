@@ -81,12 +81,12 @@ function App() {
         <div>
           <div className='flex justify-between items-center px-3 py-3'>
             <h1 className={h1TextStyling}>Todo List</h1>
-            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{todoCount}</span>
+            <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-[2rem] rounded-full flex justify-center items-center'>{todoCount}</span>
           </div>
           {/* Todo List Contents */}
-          <div className='bg-gray-200 dark:bg-slate-700 min-h-20 flex flex-col gap-2'>
+          <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
             {data.map(({id, title, type}) => 
-              <div key={id} className='bg-gray-300 dark:bg-slate-600 rounded-md px-2 gap-2 flex justify-between items-center pl-3 pr-4 h-[5rem] ring-2 ring-slate-600'>
+              <div key={id} className='bg-gray-300 dark:bg-slate-600 rounded-md px-2 gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-600 '>
                 <div>
                   <h3 className={h3TextStyling}>{title}</h3>
                   <h4 className={h4TextStyling}>{type}</h4>
