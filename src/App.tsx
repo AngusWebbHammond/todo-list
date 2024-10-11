@@ -127,11 +127,12 @@ function App() {
             </div>
           </div>
         )}
-        <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[5rem] flex flex-row gap-3 items-center hover:ring-blue-600`} onClick={addNewTodoList} key="NewTodoList">
-          <PlusCircle className='stroke-gray-100'/>
-          <h3 className={h3TextStyling}>Add Todo List</h3>
+        <div className='h-[54rem]'>
+          <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[5rem] flex flex-row gap-3 items-center hover:ring-blue-600`} onClick={addNewTodoList} key="NewTodoList">
+            <PlusCircle className='stroke-gray-100'/>
+            <h3 className={h3TextStyling}>Add Todo List</h3>
+          </div>
         </div>
-        
       </div>
     </div>
     
