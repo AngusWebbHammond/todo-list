@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { PlusCircle, Trash2 } from 'lucide-react';
 import TodoItem from './components/Todo-Item';
+import AddNewTodoList from './components/Add-New-Todo-List';
 
 const defaultData = [
   {
@@ -122,12 +123,7 @@ function App() {
             </div>
           </div>
         )}
-        <div className='h-[54rem] m-1'>
-          <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[5rem] flex flex-row gap-3 items-center hover:ring-blue-600 ring-slate-700 hover:bg-slate-600`} onClick={addNewTodoList} key="NewTodoList">
-            <PlusCircle className='stroke-gray-100'/>
-            <h3 className={h3TextStyling}>Add Todo List</h3>
-          </div>
-        </div>
+        <AddNewTodoList h3TextStyling={h3TextStyling} addNewTodoList={addNewTodoList}/>
       </div>
     </div>
     
