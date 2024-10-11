@@ -19,7 +19,7 @@ type Props = {
 
 const TodoBoard = (props: Props) => {
   return (
-    <div className='flex flex-row gap-3 overflow-auto'>
+    <div className='flex flex-row gap-3 w-4/5 overflow-auto'>
         {props.todoLists.map((todoTitle: string) => 
             <TodoList todoTitle={todoTitle} h1TextStyling={props.h1TextStyling} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} data={props.data} addNewTodo={props.addNewTodo} deleteTodoItem={props.deleteTodoItem} deleteTodoItemList={props.deleteTodoItemList}/>
         )}
