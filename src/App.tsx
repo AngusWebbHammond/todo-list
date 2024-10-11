@@ -4,6 +4,7 @@ import { PlusCircle, Trash2 } from 'lucide-react';
 import TodoItem from './components/Todo-Item';
 import AddNewTodoList from './components/Add-New-Todo-List';
 import AddNewTodo from './components/Add-New-Todo';
+import TodoListTitle from './components/Todo-List-Title';
 
 const defaultData = [
   {
@@ -103,14 +104,7 @@ function App() {
           <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[54rem] flex flex-col justify-between ring-slate-700 m-1`} key={todoTitle}>
             {/* Todo List Header */}
             <div>
-              <div className='flex justify-between items-center px-3 py-3'>
-                
-                <div className='flex flex-row gap-3 items-center'>
-                  <h1 className={h1TextStyling}>{todoTitle}</h1>
-                  <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{data.filter((item) => item.type === todoTitle).length}</span>
-                </div>
-                <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => deleteTodoItemList(todoTitle)}><Trash2 className='hover:stroke-rose-600'/></button>
-              </div>
+              <TodoListTitle todoTitle={todoTitle} h1TextStyling={h1TextStyling} data={data} deleteTodoItemList={deleteTodoItemList}/>
               {/* Todo List Contents */}
               <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
                 {data.filter((item) => item.type === todoTitle).map(({id, title, type}) => (
