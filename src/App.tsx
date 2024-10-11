@@ -26,7 +26,7 @@ const defaultData = [
   {
     id: "todo5",
     title: "Add a Completed List",
-    type: "Todo",
+    type: "Completed",
   },
   {
     id: "todo6",
