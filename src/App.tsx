@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import AddNewTodoList from './components/Add-New-Todo-List';
-import TodoList from './components/Todo-List';
+import TodoBoard from './components/Todo-Board';
 
 const defaultData = [
   {
@@ -96,12 +95,7 @@ function App() {
 
   return (
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
-      <div className='flex flex-row gap-3 overflow-auto'>
-        {todoLists.map((todoTitle: string) => 
-          <TodoList todoTitle={todoTitle} h1TextStyling={h1TextStyling} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} data={data} addNewTodo={addNewTodo} deleteTodoItem={deleteTodoItem} deleteTodoItemList={deleteTodoItemList}/>
-        )}
-        <AddNewTodoList h3TextStyling={h3TextStyling} addNewTodoList={addNewTodoList}/>
-      </div>
+      <TodoBoard h1TextStyling={h1TextStyling} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} todoLists={todoLists} data={data} addNewTodo={addNewTodo} deleteTodoItem={deleteTodoItem} addNewTodoList={addNewTodoList} deleteTodoItemList={deleteTodoItemList}/>
     </div>
     
   )
