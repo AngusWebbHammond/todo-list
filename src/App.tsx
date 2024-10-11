@@ -87,9 +87,9 @@ function App() {
 
   return (
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
-      <div className='flex flex-row gap-3'>
+      <div className='flex flex-row gap-3 overflow-auto'>
         {todoLists.map((todoTitle: string) => 
-          <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[54rem] flex flex-col justify-between`}>
+          <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[54rem] flex flex-col justify-between`} key={todoTitle}>
             {/* Todo List Header */}
             <div>
               <div className='flex justify-between items-center px-3 py-3'>
@@ -98,8 +98,7 @@ function App() {
               </div>
               {/* Todo List Contents */}
               <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
-                {data.map(({id, title, type}) => (
-                  type !== todoTitle? <></>:
+                {data.filter((item) => item.type === todoTitle).map(({id, title, type}) => (
                   <div key={id} className='bg-gray-300 dark:bg-slate-600 rounded-md px-2 gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-600 '>
                     <div>
                       <h3 className={h3TextStyling}>{title}</h3>
@@ -116,7 +115,7 @@ function App() {
             </div>
           </div>
         )}
-        <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[5rem] flex flex-row gap-3 items-center hover:ring-blue-600`} onClick={addNewTodoList}>
+        <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[5rem] flex flex-row gap-3 items-center hover:ring-blue-600`} onClick={addNewTodoList} key="NewTodoList">
           <PlusCircle className='stroke-gray-100'/>
           <h3 className={h3TextStyling}>Add Todo List</h3>
         </div>
