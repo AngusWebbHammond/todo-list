@@ -85,6 +85,14 @@ function App() {
     setTodoLists(tempTodoLists);
   }
 
+  function deleteTodoItemList (id: string): void {
+    const filteredTodoItems = data.filter(item => item.type !== id);
+    const tempTodoLists = todoLists.filter(item => item !== id);
+
+    setData(filteredTodoItems);
+    setTodoLists(tempTodoLists);
+  }
+
   return (
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
       <div className='flex flex-row gap-3 overflow-auto'>
@@ -93,8 +101,12 @@ function App() {
             {/* Todo List Header */}
             <div>
               <div className='flex justify-between items-center px-3 py-3'>
-                <h1 className={h1TextStyling}>{todoTitle}</h1>
-                <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-[2rem] rounded-full flex justify-center items-center'>{data.filter((item) => item.type === todoTitle).length}</span>
+                
+                <div className='flex flex-row gap-3 items-center'>
+                  <h1 className={h1TextStyling}>{todoTitle}</h1>
+                  <span className='text-black dark:text-white bg-gray-200 dark:bg-slate-600 w-6 h-6 rounded-full flex justify-center items-center'>{data.filter((item) => item.type === todoTitle).length}</span>
+                </div>
+                <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => deleteTodoItemList(todoTitle)}><Trash2 className='hover:stroke-rose-600'/></button>
               </div>
               {/* Todo List Contents */}
               <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
