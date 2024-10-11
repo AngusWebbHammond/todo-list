@@ -19,7 +19,7 @@ type Props = {
 
 const TodoList = (props: Props) => {
   return (
-    <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[54rem] flex flex-col justify-between ring-slate-700 m-1`} key={props.todoTitle}>
+    <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[54rem] flex flex-col justify-between ring-slate-700 m-1`}>
         {/* Todo List Header */}
         <div>
             <TodoListTitle todoTitle={props.todoTitle} h1TextStyling={props.h1TextStyling} data={props.data} deleteTodoItemList={props.deleteTodoItemList}/>
