@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import { PlusCircle, Trash2 } from 'lucide-react';
-import TodoItem from './components/Todo-Item';
 import AddNewTodoList from './components/Add-New-Todo-List';
-import AddNewTodo from './components/Add-New-Todo';
-import TodoListTitle from './components/Todo-List-Title';
+import TodoList from './components/Todo-List';
 
 const defaultData = [
   {
@@ -101,19 +98,7 @@ function App() {
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
       <div className='flex flex-row gap-3 overflow-auto'>
         {todoLists.map((todoTitle: string) => 
-          <div className={`bg-gray-100 dark:bg-slate-700 rounded-lg min-w-96 max-w-96 ring-1 ring-offset-slate-900/5 shadow-xl p-3 h-[54rem] flex flex-col justify-between ring-slate-700 m-1`} key={todoTitle}>
-            {/* Todo List Header */}
-            <div>
-              <TodoListTitle todoTitle={todoTitle} h1TextStyling={h1TextStyling} data={data} deleteTodoItemList={deleteTodoItemList}/>
-              {/* Todo List Contents */}
-              <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
-                {data.filter((item) => item.type === todoTitle).map(({id, title, type}) => (
-                  <TodoItem id={id} title={title} type={type} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} deleteTodoItem={deleteTodoItem} key={id}/>
-                ))}
-              </div>
-            </div>
-            <AddNewTodo todoTitle={todoTitle} h3TextStyling={h3TextStyling} addNewTodo={addNewTodo}/>
-          </div>
+          <TodoList todoTitle={todoTitle} h1TextStyling={h1TextStyling} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} data={data} addNewTodo={addNewTodo} deleteTodoItem={deleteTodoItem} deleteTodoItemList={deleteTodoItemList}/>
         )}
         <AddNewTodoList h3TextStyling={h3TextStyling} addNewTodoList={addNewTodoList}/>
       </div>
