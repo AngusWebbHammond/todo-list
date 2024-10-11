@@ -3,6 +3,7 @@ import './App.css'
 import { PlusCircle, Trash2 } from 'lucide-react';
 import TodoItem from './components/Todo-Item';
 import AddNewTodoList from './components/Add-New-Todo-List';
+import AddNewTodo from './components/Add-New-Todo';
 
 const defaultData = [
   {
@@ -117,10 +118,7 @@ function App() {
                 ))}
               </div>
             </div>
-            <div className='bg-gray-200 dark:bg-slate-600 rounded-md px-2 gap-2 flex items-center pl-2 pr-4 h-[5rem] hover:ring-blue-600 ring-2 ring-slate-600' onClick={() => addNewTodo(todoTitle)}>
-              <PlusCircle className='stroke-gray-100'/>
-              <h3 className={h3TextStyling}>Add Todo</h3>
-            </div>
+            <AddNewTodo todoTitle={todoTitle} h3TextStyling={h3TextStyling} addNewTodo={addNewTodo}/>
           </div>
         )}
         <AddNewTodoList h3TextStyling={h3TextStyling} addNewTodoList={addNewTodoList}/>
