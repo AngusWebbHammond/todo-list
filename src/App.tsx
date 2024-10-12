@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import TodoBoard from './components/Todo-Board';
 
@@ -49,11 +49,11 @@ const todoTypes = ["Todo", "Completed"];
 
 
 function App() {
-  const [todoCount, setTodoCount] = useState(defaultData.length);
-  const [data, setData] = useState(defaultData);
-  const [todoId, setTodoId] = useState(defaultData.length);
-  const [todoLists, setTodoLists] = useState(todoTypes);
-  const [todoListId, setTodoListId] = useState(todoTypes.length);
+  const [todoCount, setTodoCount] = useState<number>(defaultData.length);
+  const [data, setData] = useState<{id: string, title: string, type: string,}[]>(defaultData);
+  const [todoId, setTodoId] = useState<number>(defaultData.length);
+  const [todoLists, setTodoLists] = useState<string[]>(todoTypes);
+  const [todoListId, setTodoListId] = useState<number>(todoTypes.length);
 
   const h1TextStyling = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
