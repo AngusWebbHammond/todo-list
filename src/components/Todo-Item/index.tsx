@@ -14,6 +14,11 @@ type Props = {
     h4TextStyling: string,
     deleteTodoItem: (id: string) => void,
     index: number,
+    setData: (data: {
+      id: string;
+      title: string;
+      type: string;
+    }[]) => void,
 }
 
 const TodoItem = (props: Props) => {
@@ -25,7 +30,7 @@ const TodoItem = (props: Props) => {
   const id = props.id;
   const title = props.title;
   const type = props.type;
-  const index = props.index;
+  const index :number = props.index;
 
   useEffect(() => {
   const el = ref.current;
@@ -34,7 +39,7 @@ const TodoItem = (props: Props) => {
   return combine(
     draggable({
       element: el,
-      getInitialData: () => ({ id, title, type }),
+      getInitialData: () => ({ id, title, type}),
       onDragStart: () => setDragging(true),
       onDrop: () => setDragging(false),
     }), 
@@ -49,10 +54,9 @@ const TodoItem = (props: Props) => {
         setIsDraggedOver(false);
         setClosestEdge(null);
       },
-      onDrop: ({source, self}) => {
+      onDrop: () => {
         setIsDraggedOver(false);
         setClosestEdge(null);
-        console.log(source.data.id, self.data.type, self.data.index);
       },
       getData: () => ({ id, type, index }),
     }),
