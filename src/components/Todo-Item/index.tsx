@@ -1,4 +1,4 @@
-import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
@@ -17,6 +17,8 @@ const TodoItem = (props: Props) => {
   // Drag and Drop Hooks
   const ref = useRef(null);
   const [dragging, setDragging] = useState<boolean>(false)
+  const dropRef = useRef(null);
+  const [isDraggedOver, setIsDraggedOver] = useState<boolean>(false);
 
   useEffect(() => {
   const el = ref.current;
@@ -28,6 +30,18 @@ const TodoItem = (props: Props) => {
       onDrop: () => setDragging(false),
     })
   })
+
+  useEffect(() => {
+    const el = ref.current;
+    invariant(el);
+
+    return dropTargetForElements({
+      element: el,
+      onDragEnter: () => setIsDraggedOver(true),
+      onDragLeave: () => setIsDraggedOver(false),
+      onDrop: () => setIsDraggedOver(false),
+    });
+  }, []);
 
   return (
     <>
