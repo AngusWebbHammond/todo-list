@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import './App.css'
 import TodoBoard from './components/Todo-Board';
 
@@ -54,6 +54,9 @@ function App() {
   const [todoId, setTodoId] = useState<number>(defaultData.length);
   const [todoLists, setTodoLists] = useState<string[]>(todoTypes);
   const [todoListId, setTodoListId] = useState<number>(todoTypes.length);
+  // const moveCard = useCallback(
+  //   (todoId: string, targetType: string, targetId: string) => ,[setData]
+  // )
 
   const h1TextStyling = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
