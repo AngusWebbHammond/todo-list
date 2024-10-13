@@ -36,8 +36,8 @@ type Props = {
 
 const TodoItem = (props: Props) => {
   // Drag and Drop Hooks
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [dragging, setDragging] = useState<boolean>(false)
+  const todoItemRef = useRef<HTMLDivElement | null>(null);
+  const [dragging, setDragging] = useState<boolean>(false);
   const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
   const id: string = props.id;
   const title: string = props.title;
@@ -45,89 +45,92 @@ const TodoItem = (props: Props) => {
   const index: number = props.index;
 
   useEffect(() => {
-  const el = ref.current;
-  invariant(el);
-    
-  return combine(
-    draggable({
-      element: el,
-      getInitialData: () => ({ id, title, type}),
-      onDragStart: () => setDragging(true),
-      onDrop: () => setDragging(false),
-    }), 
-    dropTargetForElements({
-      element: el,
-      onDragStart: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
-      onDragEnter: (args) => {
-        setClosestEdge(extractClosestEdge(args.self.data));
-      },
-      onDrag: (args) => {
-        if (closestEdge) {
-          return;
+    const element: HTMLDivElement | null = todoItemRef.current;
+    invariant(element);
+      
+    return combine(
+      draggable({
+        element: element,
+        getInitialData: () => ({ id, title, type}),
+        onDragStart: () => setDragging(true),
+        onDrop: () => setDragging(false),
+      }), 
+      dropTargetForElements({
+        element: element,
+        onDragStart: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
+        onDragEnter: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
+        onDrag: (args) => {
+          if (closestEdge) {
+            return;
+          }
+          
+          setClosestEdge(extractClosestEdge(args.self.data));
+        },
+        onDragLeave: () => {
+          setClosestEdge(null);
+        },
+        onDrop: () => {
+          setClosestEdge(null);
+        },
+        getData: ({input, element}) => {
+          const data: {id: string, type: string, index: number} = { 
+            id, type, index 
+          };
+
+          return attachClosestEdge(data, {
+            input,
+            element,
+            allowedEdges: ['top', 'bottom']
+          })
+        },
+      }),
+      monitorForElements({
+        onDrop: ({location, source}) => {
+          const target: DropTargetRecord = location.current.dropTargets[0];
+          if (!target) {
+            return;
+          }
+
+          const sourceData: Record<string, unknown> = source.data;
+          const targetData: Record<string, unknown> = target.data;
+
+          if (!sourceData || !targetData) {
+            return;
+          }
+
+          if (!sourceData.id || !targetData.id) {
+            return;
+          }
+
+          const indexOfSource: number = props.data.findIndex((item) => item.id === sourceData.id);
+          const indexOfTarget: number = props.data.findIndex((item) => item.id === targetData.id);
+
+          if (indexOfTarget < 0 || indexOfSource < 0) {
+            return;
+          }
+
+          const tempArr: {
+            id: string;
+            title: string;
+            type: string;
+          }[] = props.data;
+          tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
+          const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
+
+          flushSync(() => {
+            props.setData(
+              reorderWithEdge({
+                list: props.data,
+                startIndex: indexOfSource,
+                indexOfTarget,
+                closestEdgeOfTarget,
+                axis: 'vertical',
+              }),
+            );
+          });
         }
-        setClosestEdge(extractClosestEdge(args.self.data));
-      },
-      onDragLeave: () => {
-        setClosestEdge(null);
-      },
-      onDrop: () => {
-        setClosestEdge(null);
-      },
-      getData: ({input, element}) => {
-        const data: {id: string, type: string, index: number} = { 
-          id, type, index 
-        };
-
-        return attachClosestEdge(data, {
-          input,
-          element,
-          allowedEdges: ['top', 'bottom']
-        })
-      },
-    }),
-    monitorForElements({
-      onDrop: ({location, source}) => {
-        const target: DropTargetRecord = location.current.dropTargets[0];
-        if (!target) {
-          return;
-        }
-
-        const sourceData: Record<string, unknown> = source.data;
-        const targetData: Record<string, unknown> = target.data;
-
-        if (!sourceData || !targetData) {
-          return;
-        }
-
-        const indexOfSource: number = props.data.findIndex((item) => item.id === sourceData.id);
-        const indexOfTarget: number = props.data.findIndex((item) => item.id === targetData.id);
-
-        if (indexOfTarget < 0 || indexOfSource < 0) {
-          return;
-        }
-
-        const tempArr: {
-          id: string;
-          title: string;
-          type: string;
-        }[] = props.data;
-        tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
-        const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
-
-        flushSync(() => {
-          props.setData(
-            reorderWithEdge({
-              list: props.data,
-              startIndex: indexOfSource,
-              indexOfTarget,
-              closestEdgeOfTarget,
-              axis: 'vertical',
-            }),
-          );
-        });
-      }
-    })
-  )
+      })
+    )
   }, [id, title, type, index]);
 
   return (
@@ -136,7 +139,7 @@ const TodoItem = (props: Props) => {
         className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 
           ${dragging?`opacity-50`:`opacity-100`} 
           `}
-        ref={ref}>
+        ref={todoItemRef}>
           <div>
               <h3 className={props.h3TextStyling}>{props.title}</h3>
               <h4 className={props.h4TextStyling}>{props.type}</h4>

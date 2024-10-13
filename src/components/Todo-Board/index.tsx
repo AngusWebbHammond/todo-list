@@ -20,13 +20,14 @@ type Props = {
     deleteTodoItem: (id: string) => void,
     addNewTodoList: () => void,
     deleteTodoItemList: (title: string) => void,
+    setTodoLists: (todoLists: string[]) => void,
 }
 
 const TodoBoard = (props: Props) => {
   return (
-    <div className='flex flex-row gap-3 w-4/5 overflow-auto'>
+    <div className='flex flex-row w-4/5 overflow-auto p-2'>
         {props.todoLists.map((todoTitle: string) => 
-            <TodoList todoTitle={todoTitle} h1TextStyling={props.h1TextStyling} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} data={props.data} setData={props.setData} addNewTodo={props.addNewTodo} deleteTodoItem={props.deleteTodoItem} deleteTodoItemList={props.deleteTodoItemList} key={todoTitle}/>
+            <TodoList setTodoLists={props.setTodoLists}todoLists={props.todoLists} todoTitle={todoTitle} h1TextStyling={props.h1TextStyling} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} data={props.data} setData={props.setData} addNewTodo={props.addNewTodo} deleteTodoItem={props.deleteTodoItem} deleteTodoItemList={props.deleteTodoItemList} key={todoTitle}/>
         )}
         <AddNewTodoList h3TextStyling={props.h3TextStyling} addNewTodoList={props.addNewTodoList}/>
     </div>
