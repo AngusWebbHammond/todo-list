@@ -145,7 +145,7 @@ const TodoItem = (props: Props) => {
               <h4 className={props.h4TextStyling}>{props.type}</h4>
           </div>
           <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => props.deleteTodoItem(props.id)}><Trash2 className='hover:stroke-rose-600'/></button>
-          {closestEdge && <DropIndicator edge={closestEdge} />}
+          {closestEdge && <DropIndicator edge={closestEdge} gap='12px'/>}
       </div>
     </>
   )
