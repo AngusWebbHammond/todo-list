@@ -49,7 +49,6 @@ const todoTypes = ["Todo", "Completed"];
 
 
 function App() {
-  const [todoCount, setTodoCount] = useState<number>(defaultData.length);
   const [data, setData] = useState<{id: string, title: string, type: string,}[]>(defaultData);
   const [todoId, setTodoId] = useState<number>(defaultData.length);
   const [todoLists, setTodoLists] = useState<string[]>(todoTypes);
@@ -65,7 +64,6 @@ function App() {
   function deleteTodoItem (id: string): void {
     const alteredData = data.filter((item) => item.id !== id);
     setData(alteredData);
-    setTodoCount(alteredData.length);
   }
 
   function addNewTodo (type: string): void {
@@ -78,7 +76,6 @@ function App() {
       type: type,
     });
     setData(tempTodoList);
-    setTodoCount(tempTodoList.length)
   }
 
   function addNewTodoList (): void {

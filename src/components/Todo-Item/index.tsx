@@ -37,7 +37,6 @@ const TodoItem = (props: Props) => {
   // Drag and Drop Hooks
   const ref = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<boolean>(false)
-  const [isDraggedOver, setIsDraggedOver] = useState<boolean>(false);
   const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
   const id = props.id;
   const title = props.title;
@@ -59,7 +58,6 @@ const TodoItem = (props: Props) => {
       element: el,
       onDragStart: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
       onDragEnter: (args) => {
-        setIsDraggedOver(true);
         setClosestEdge(extractClosestEdge(args.self.data));
       },
       onDrag: (args) => {
@@ -69,11 +67,9 @@ const TodoItem = (props: Props) => {
         setClosestEdge(extractClosestEdge(args.self.data));
       },
       onDragLeave: () => {
-        setIsDraggedOver(false);
         setClosestEdge(null);
       },
       onDrop: () => {
-        setIsDraggedOver(false);
         setClosestEdge(null);
       },
       getData: ({input, element}) => {
