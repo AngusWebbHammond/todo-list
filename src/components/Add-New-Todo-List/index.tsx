@@ -3,6 +3,7 @@ import { PlusCircle } from "lucide-react"
 type Props = {
     h3TextStyling: string,
     addNewTodoList: () => void,
+    todoLists: string[],
 }
 
 const AddNewTodoList = (props: Props) => {

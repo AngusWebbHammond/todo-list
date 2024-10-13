@@ -145,7 +145,7 @@ const TodoItem = (props: Props) => {
         }
       })
     )
-  }, [id, title, type, index]);
+  }, [id, title, type, index, props.data]);
 
   return (
     <>

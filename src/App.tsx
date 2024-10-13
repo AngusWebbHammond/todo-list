@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import TodoBoard from './components/Todo-Board';
 
@@ -54,6 +54,29 @@ function App() {
   const [todoLists, setTodoLists] = useState<string[]>(todoTypes);
   const [todoListId, setTodoListId] = useState<number>(todoTypes.length);
 
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('data') || '{}');
+    const lists = JSON.parse(localStorage.getItem('todoLists') || '{}');
+    if (items) {
+      setData(items);
+      setTodoId(items.length+1);
+    }
+    if (lists) {
+      setTodoLists(lists);
+      setTodoId(lists.length+1);
+    }
+  }, [])
+  
+  useEffect(() => {
+    if (!data || data.length < 1) {
+      return;
+    }
+    localStorage.setItem('data', JSON.stringify(data));
+    localStorage.setItem('todoLists', JSON.stringify(todoLists));
+    return;
+
+  }, [data, todoLists]);
+
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling: string = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
   const h4TextStyling: string = 'text-gray-700 dark:text-gray-300 font-normal text-sm flex justify-left';
@@ -90,6 +113,7 @@ function App() {
     setTodoLists(tempTodoLists);
   }
 
+  
   return (
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
       <TodoBoard setTodoLists={setTodoLists} h1TextStyling={h1TextStyling} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} todoLists={todoLists} data={data} setData={setData} addNewTodo={addNewTodo} deleteTodoItem={deleteTodoItem} addNewTodoList={addNewTodoList} deleteTodoItemList={deleteTodoItemList}/>

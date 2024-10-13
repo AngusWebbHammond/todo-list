@@ -132,7 +132,7 @@ const TodoList = (props: Props) => {
                 }
             })
         )
-    }, [todoTitle])
+    }, [todoTitle, props.todoLists])
 
     return (
         <div 

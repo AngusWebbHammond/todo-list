@@ -19,9 +19,8 @@ This is a typescript version of my basic-todo-list with more functionality.
 * Naming of new todo items
 * Renaming of Todo Lists
 * Todo Descriptions
+* Persistant Data - Nearly Finished
 
 ## Known Issues
 * Occasionally the drag and drop feature with todo items can shuffle the items
-* Data is not persistant on reload
-* New Todo Lists occasionally disappear when dragged
-* Data returns when drag and drop after it was deleted within a todo list
+* Data is not persistant on reload - Working on a fix for this, the useEffect are in, just it isn't working as expected
