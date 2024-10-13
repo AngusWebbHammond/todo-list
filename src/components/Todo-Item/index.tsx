@@ -11,6 +11,7 @@ import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
 import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box';
 import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
 import { flushSync } from 'react-dom';
+import { DropTargetRecord } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 
 
 type Props = {
@@ -38,10 +39,10 @@ const TodoItem = (props: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<boolean>(false)
   const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
-  const id = props.id;
-  const title = props.title;
-  const type = props.type;
-  const index :number = props.index;
+  const id: string = props.id;
+  const title: string = props.title;
+  const type: string = props.type;
+  const index: number = props.index;
 
   useEffect(() => {
   const el = ref.current;
@@ -73,7 +74,7 @@ const TodoItem = (props: Props) => {
         setClosestEdge(null);
       },
       getData: ({input, element}) => {
-        const data = { 
+        const data: {id: string, type: string, index: number} = { 
           id, type, index 
         };
 
@@ -86,13 +87,13 @@ const TodoItem = (props: Props) => {
     }),
     monitorForElements({
       onDrop: ({location, source}) => {
-        const target = location.current.dropTargets[0];
+        const target: DropTargetRecord = location.current.dropTargets[0];
         if (!target) {
           return;
         }
 
-        const sourceData = source.data;
-        const targetData = target.data;
+        const sourceData: Record<string, unknown> = source.data;
+        const targetData: Record<string, unknown> = target.data;
 
         if (!sourceData || !targetData) {
           return;

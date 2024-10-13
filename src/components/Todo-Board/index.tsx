@@ -3,8 +3,8 @@ import TodoList from "../Todo-List"
 
 type Props = {
     h1TextStyling: string,
-    h3TextStyling:string,
-    h4TextStyling:string,
+    h3TextStyling: string,
+    h4TextStyling: string,
     todoLists: string[],
     data: {
         id: string;
