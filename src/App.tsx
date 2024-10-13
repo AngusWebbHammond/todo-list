@@ -49,23 +49,21 @@ const todoTypes: string[] = ["Todo", "Completed"];
 
 
 function App() {
-  const testData = true;
+  const testData = false;
   const [data, setData] = useState<{id: string, title: string, type: string,}[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
   const [todoId, setTodoId] = useState<number>(testData?defaultData.length:JSON.parse(localStorage.getItem('todoId') || '{}'));
   const [todoLists, setTodoLists] = useState<string[]>(testData?todoTypes:JSON.parse(localStorage.getItem('todoLists') || '{}'));
   const [todoListId, setTodoListId] = useState<number>(testData?todoTypes.length:JSON.parse(localStorage.getItem('todoListId') || '{}'));
   
   useEffect(() => {
-    if (!data || data.length < 1) {
-      return;
-    }
+
     localStorage.setItem('data', JSON.stringify(data));
     localStorage.setItem('todoLists', JSON.stringify(todoLists));
     localStorage.setItem('todoListId', JSON.stringify(todoListId));
     localStorage.setItem('todoId', JSON.stringify(todoId));
     return;
 
-  }, [data, todoLists]);
+  }, [data, todoLists, todoId, todoListId]);
 
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling: string = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
