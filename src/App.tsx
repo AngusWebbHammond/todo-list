@@ -49,23 +49,11 @@ const todoTypes: string[] = ["Todo", "Completed"];
 
 
 function App() {
-  const [data, setData] = useState<{id: string, title: string, type: string,}[]>(defaultData);
-  const [todoId, setTodoId] = useState<number>(defaultData.length);
-  const [todoLists, setTodoLists] = useState<string[]>(todoTypes);
-  const [todoListId, setTodoListId] = useState<number>(todoTypes.length);
-
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('data') || '{}');
-    const lists = JSON.parse(localStorage.getItem('todoLists') || '{}');
-    if (items) {
-      setData(items);
-      setTodoId(items.length+1);
-    }
-    if (lists) {
-      setTodoLists(lists);
-      setTodoId(lists.length+1);
-    }
-  }, [])
+  const testData = true;
+  const [data, setData] = useState<{id: string, title: string, type: string,}[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
+  const [todoId, setTodoId] = useState<number>(testData?defaultData.length:JSON.parse(localStorage.getItem('todoId') || '{}'));
+  const [todoLists, setTodoLists] = useState<string[]>(testData?todoTypes:JSON.parse(localStorage.getItem('todoLists') || '{}'));
+  const [todoListId, setTodoListId] = useState<number>(testData?todoTypes.length:JSON.parse(localStorage.getItem('todoListId') || '{}'));
   
   useEffect(() => {
     if (!data || data.length < 1) {
@@ -73,6 +61,8 @@ function App() {
     }
     localStorage.setItem('data', JSON.stringify(data));
     localStorage.setItem('todoLists', JSON.stringify(todoLists));
+    localStorage.setItem('todoListId', JSON.stringify(todoListId));
+    localStorage.setItem('todoId', JSON.stringify(todoId));
     return;
 
   }, [data, todoLists]);
