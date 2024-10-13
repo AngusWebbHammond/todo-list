@@ -70,7 +70,7 @@ const TodoList = (props: Props) => {
                     if (closestEdge) {
                       return;
                     }
-                    
+
                     if (args.source.data.dragType !== "todo-list") {
                         return;
                     }
@@ -152,7 +152,7 @@ const TodoList = (props: Props) => {
             <div className="p-2">
                 <AddNewTodo todoTitle={props.todoTitle} h3TextStyling={props.h3TextStyling} addNewTodo={props.addNewTodo}/>
             </div>
-            {closestEdge && <DropIndicator edge={closestEdge} gap="12px" />}
+            {(closestEdge && !dragging) && <DropIndicator edge={closestEdge} gap="12px" />}
         </div>
     )
 }
