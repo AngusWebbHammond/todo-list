@@ -12,6 +12,11 @@ type Props = {
     h1TextStyling: string,
     h3TextStyling: string,
     h4TextStyling: string,
+    setData: (data: {
+        id: string;
+        title: string;
+        type: string;
+      }[]) => void,
     addNewTodo: (title: string) => void,
     deleteTodoItem: (id: string) => void,
     deleteTodoItemList: (title: string) => void,
@@ -26,7 +31,7 @@ const TodoList = (props: Props) => {
             {/* Todo List Contents */}
             <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
                 {props.data.filter((item) => item.type === props.todoTitle).map(({id, title, type}) => (
-                    <TodoItem index={props.data.findIndex((item) => item.id === id)} id={id} title={title} type={type} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={id}/>
+                    <TodoItem index={props.data.findIndex((item) => item.id === id)} id={id} title={title} type={type} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={id} data={props.data} setData={props.setData}/>
                 ))}
             </div>
         </div>

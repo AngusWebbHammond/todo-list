@@ -5,6 +5,9 @@ import invariant from "tiny-invariant";
 import type { Edge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/types';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
 import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box';
+import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
+import { flushSync } from 'react-dom';
+
 
 type Props = {
     id: string,
@@ -19,6 +22,11 @@ type Props = {
       title: string;
       type: string;
     }[]) => void,
+    data: {
+      id: string;
+      title: string;
+      type: string;
+    }[],
 }
 
 const TodoItem = (props: Props) => {
@@ -60,6 +68,43 @@ const TodoItem = (props: Props) => {
       },
       getData: () => ({ id, type, index }),
     }),
+    monitorForElements({
+      onDrop: ({location, source}) => {
+        const target = location.current.dropTargets[0];
+        if (!target) {
+          return;
+        }
+
+        const sourceData = source.data;
+        const targetData = target.data;
+
+        if (!sourceData || !targetData) {
+          return;
+        }
+
+        const indexOfSource: number = props.data.findIndex((item) => item.id === sourceData.id);
+        const indexOfTarget: number = props.data.findIndex((item) => item.id === targetData.id);
+
+        if (indexOfTarget < 0 || indexOfSource < 0) {
+          return;
+        }
+
+        const tempArr = props.data;
+        tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
+
+        flushSync(() => {
+          props.setData(
+            reorderWithEdge({
+              list: props.data,
+              startIndex: indexOfSource,
+              indexOfTarget,
+              closestEdgeOfTarget: "top",
+              axis: 'vertical',
+            }),
+          );
+        });
+      }
+    })
   )
   }, [id, title, type, index]);
 
