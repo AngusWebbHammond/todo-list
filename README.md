@@ -24,3 +24,4 @@ This is a typescript version of my basic-todo-list with more functionality.
 * Occasionally the drag and drop feature with todo items can shuffle the items
 * Data is not persistant on reload
 * New Todo Lists occasionally disappear when dragged
+* Data returns when drag and drop after it was deleted within a todo list
