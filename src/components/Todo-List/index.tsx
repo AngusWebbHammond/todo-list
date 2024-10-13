@@ -29,13 +29,15 @@ const TodoList = (props: Props) => {
         <div>
             <TodoListTitle todoTitle={props.todoTitle} h1TextStyling={props.h1TextStyling} data={props.data} deleteTodoItemList={props.deleteTodoItemList}/>
             {/* Todo List Contents */}
-            <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[44rem] flex flex-col gap-[0.5rem] overflow-auto'>
+            <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[43rem] flex flex-col overflow-auto p-2'>
                 {props.data.filter((item) => item.type === props.todoTitle).map(({id, title, type}) => (
                     <TodoItem index={props.data.findIndex((item) => item.id === id)} id={id} title={title} type={type} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={id} data={props.data} setData={props.setData}/>
                 ))}
             </div>
         </div>
-        <AddNewTodo todoTitle={props.todoTitle} h3TextStyling={props.h3TextStyling} addNewTodo={props.addNewTodo}/>
+        <div className="p-2">
+            <AddNewTodo todoTitle={props.todoTitle} h3TextStyling={props.h3TextStyling} addNewTodo={props.addNewTodo}/>
+        </div>
     </div>
   )
 }

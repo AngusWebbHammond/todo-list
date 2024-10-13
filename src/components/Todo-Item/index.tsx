@@ -62,6 +62,12 @@ const TodoItem = (props: Props) => {
         setIsDraggedOver(true);
         setClosestEdge(extractClosestEdge(args.self.data));
       },
+      onDrag: (args) => {
+        if (closestEdge) {
+          return;
+        }
+        setClosestEdge(extractClosestEdge(args.self.data));
+      },
       onDragLeave: () => {
         setIsDraggedOver(false);
         setClosestEdge(null);
@@ -126,8 +132,7 @@ const TodoItem = (props: Props) => {
   return (
     <>
       <div 
-        className={`
-            ${isDraggedOver?``:`bg-gray-300 dark:bg-slate-600`} relative rounded-md px-2 gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-600 
+        className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 
           ${dragging?`opacity-50`:`opacity-100`} 
           `}
         ref={ref}>
