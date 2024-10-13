@@ -2,7 +2,11 @@ import { draggable, dropTargetForElements, monitorForElements } from '@atlaskit/
 import { Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
-import type { Edge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/types';
+import { 
+  Edge,
+  attachClosestEdge,
+  extractClosestEdge
+ } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
 import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box';
 import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
@@ -53,10 +57,10 @@ const TodoItem = (props: Props) => {
     }), 
     dropTargetForElements({
       element: el,
-      onDragStart: () => setClosestEdge('top'),
-      onDragEnter: () => {
+      onDragStart: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
+      onDragEnter: (args) => {
         setIsDraggedOver(true);
-        setClosestEdge('top');
+        setClosestEdge(extractClosestEdge(args.self.data));
       },
       onDragLeave: () => {
         setIsDraggedOver(false);
@@ -66,7 +70,17 @@ const TodoItem = (props: Props) => {
         setIsDraggedOver(false);
         setClosestEdge(null);
       },
-      getData: () => ({ id, type, index }),
+      getData: ({input, element}) => {
+        const data = { 
+          id, type, index 
+        };
+
+        return attachClosestEdge(data, {
+          input,
+          element,
+          allowedEdges: ['top', 'bottom']
+        })
+      },
     }),
     monitorForElements({
       onDrop: ({location, source}) => {
@@ -91,6 +105,7 @@ const TodoItem = (props: Props) => {
 
         const tempArr = props.data;
         tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
+        const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
 
         flushSync(() => {
           props.setData(
@@ -98,7 +113,7 @@ const TodoItem = (props: Props) => {
               list: props.data,
               startIndex: indexOfSource,
               indexOfTarget,
-              closestEdgeOfTarget: "top",
+              closestEdgeOfTarget,
               axis: 'vertical',
             }),
           );
