@@ -106,7 +106,11 @@ const TodoItem = (props: Props) => {
           return;
         }
 
-        const tempArr = props.data;
+        const tempArr: {
+          id: string;
+          title: string;
+          type: string;
+        }[] = props.data;
         tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
         const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
 
