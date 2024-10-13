@@ -51,16 +51,30 @@ const TodoItem = (props: Props) => {
     return combine(
       draggable({
         element: element,
-        getInitialData: () => ({ id, title, type}),
+        getInitialData: () => ({ id, title, type, dragType: "todo-item" }),
         onDragStart: () => setDragging(true),
         onDrop: () => setDragging(false),
       }), 
       dropTargetForElements({
         element: element,
-        onDragStart: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
-        onDragEnter: (args) => setClosestEdge(extractClosestEdge(args.self.data)),
+        onDragStart: (args) => {
+          if (args.source.data.dragType !== "todo-item") {
+            return;
+          }
+          setClosestEdge(extractClosestEdge(args.self.data));
+        },
+        onDragEnter: (args) => {
+          if (args.source.data.dragType !== "todo-item") {
+            return;
+          }
+          setClosestEdge(extractClosestEdge(args.self.data));
+        },
         onDrag: (args) => {
           if (closestEdge) {
+            return;
+          }
+
+          if (args.source.data.dragType !== "todo-item") {
             return;
           }
           
