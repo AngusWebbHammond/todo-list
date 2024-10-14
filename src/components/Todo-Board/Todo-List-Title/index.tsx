@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from "lucide-react"
 import { useState } from "react";
-import { TodoType } from "../../types";
+import { TodoType } from "../../../types";
 
 type Props = {
     todoTitle: string,
