@@ -15,10 +15,10 @@ The idea of this is to build the framework to extend to different board types, t
 * Renaming
   * Todo Items
   * Todo Lists
+* Todo Descriptions
 
 ### Future Features
 * Different todo views
   * List of all Todo Items
   * Ordered todo list
 * Sorting
-* Todo Descriptions
