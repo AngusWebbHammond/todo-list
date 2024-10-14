@@ -1,58 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import TodoBoard from './components/Todo-Board';
+import importData from './assets/default-data.json';
 
-const defaultData : {id:string, title: string, type: string, description: string}[] = [
-  {
-    id: "todo1",
-    title: "Create Todo List",
-    type: "Todo",
-    description: "",
-  },
-  {
-    id: "todo2",
-    title: "Learn Pragmatic Drag and Drop",
-    type: "Todo",
-    description: "",
-  },
-  {
-    id: "todo3",
-    title: "Create Calculator App",
-    type: "Completed",
-    description: "",
-  },
-  {
-    id: "todo4",
-    title: "Learn Tailwind CSS",
-    type: "Todo",
-    description: "",
-  },
-  {
-    id: "todo5",
-    title: "Add a Completed List",
-    type: "Completed",
-    description: "",
-  },
-  {
-    id: "todo6",
-    title: "Style the Todo List",
-    type: "Completed",
-    description: "",
-  },
-  {
-    id: "todo7",
-    title: "Add a Todo Counter",
-    type: "Completed",
-    description: "",
-  },
-  {
-    id: "todo8",
-    title: "Add Sorting",
-    type: "Todo",
-    description: "",
-  }
-];
-
+const defaultData : {id:string, title: string, type: string, description: string}[] = importData;
 const todoTypes: string[] = ["Todo", "Completed"];
 
 
