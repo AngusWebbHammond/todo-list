@@ -2,6 +2,7 @@
 
 ## Introduction
 This is a typescript version of my basic-todo-list with more functionality.
+The idea of this is to build the framework to extend to different board types, to be used within a management style application.
 
 ## Features
 ### Current Features
