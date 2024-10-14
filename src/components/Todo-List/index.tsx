@@ -31,6 +31,8 @@ type Props = {
     deleteTodoItem: (id: string) => void,
     deleteTodoItemList: (title: string) => void,
     setTodoLists: (todoLists: string[]) => void,
+    isTitleUpdating: boolean,
+    setIsTitleUpdating: (isTitleUpdating: boolean) => void,
 }
 
 const TodoList = (props: Props) => {
@@ -145,7 +147,7 @@ const TodoList = (props: Props) => {
                 {/* Todo List Contents */}
                 <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[43rem] flex flex-col overflow-auto p-3 gap-3'>
                     {props.data.filter((item) => item.type === props.todoTitle).map(({id, title, type}) => (
-                        <TodoItem index={props.data.findIndex((item) => item.id === id)} id={id} title={title} type={type} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={id} data={props.data} setData={props.setData}/>
+                        <TodoItem isTitleUpdating={props.isTitleUpdating} setIsTitleUpdating={props.setIsTitleUpdating} index={props.data.findIndex((item) => item.id === id)} id={id} title={title} type={type} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={id} data={props.data} setData={props.setData}/>
                     ))}
                 </div>
             </div>

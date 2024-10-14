@@ -54,6 +54,7 @@ function App() {
   const [todoId, setTodoId] = useState<number>(testData?defaultData.length:JSON.parse(localStorage.getItem('todoId') || '{}'));
   const [todoLists, setTodoLists] = useState<string[]>(testData?todoTypes:JSON.parse(localStorage.getItem('todoLists') || '{}'));
   const [todoListId, setTodoListId] = useState<number>(testData?todoTypes.length:JSON.parse(localStorage.getItem('todoListId') || '{}'));
+  const [isTitleUpdating, setIsTitleUpdating] = useState<boolean>(false);
   
   useEffect(() => {
 
@@ -63,7 +64,7 @@ function App() {
     localStorage.setItem('todoId', JSON.stringify(todoId));
     return;
 
-  }, [data, todoLists, todoId, todoListId]);
+  }, [data, todoLists, todoId, todoListId, isTitleUpdating]);
 
   const h1TextStyling: string = 'text-black dark:text-white font-medium text-2xl flex justify-left';
   const h3TextStyling: string = 'text-gray-800 dark:text-gray-100 font-bold text-md flex justify-left items-center';
@@ -104,7 +105,7 @@ function App() {
   
   return (
     <div className='flex flex-row gap-2 justify-center items-center h-screen bg-white dark:bg-slate-900'>
-      <TodoBoard setTodoLists={setTodoLists} h1TextStyling={h1TextStyling} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} todoLists={todoLists} data={data} setData={setData} addNewTodo={addNewTodo} deleteTodoItem={deleteTodoItem} addNewTodoList={addNewTodoList} deleteTodoItemList={deleteTodoItemList}/>
+      <TodoBoard setTodoLists={setTodoLists} h1TextStyling={h1TextStyling} h3TextStyling={h3TextStyling} h4TextStyling={h4TextStyling} todoLists={todoLists} data={data} setData={setData} addNewTodo={addNewTodo} deleteTodoItem={deleteTodoItem} addNewTodoList={addNewTodoList} deleteTodoItemList={deleteTodoItemList} isTitleUpdating={isTitleUpdating} setIsTitleUpdating={setIsTitleUpdating}/>
     </div>
     
   )

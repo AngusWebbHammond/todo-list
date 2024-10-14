@@ -1,5 +1,5 @@
 import { draggable, dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { Trash2 } from "lucide-react"
+import { Pencil, Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import { 
@@ -32,6 +32,8 @@ type Props = {
       title: string;
       type: string;
     }[],
+    isTitleUpdating: boolean,
+    setIsTitleUpdating: (isTitleUpdating: boolean) => void,
 }
 
 const TodoItem = (props: Props) => {
@@ -39,6 +41,9 @@ const TodoItem = (props: Props) => {
   const todoItemRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<boolean>(false);
   const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [tempTitle, setTempTitle] = useState<string>(props.title);
+
   const id: string = props.id;
   const title: string = props.title;
   const type: string = props.type;
@@ -147,6 +152,14 @@ const TodoItem = (props: Props) => {
     )
   }, [id, title, type, index, props.data]);
 
+  const updateTitle = (entry: string, index: number) => {
+    const tempArr = props.data;
+    tempArr[index].title = entry;
+    props.setData(tempArr);
+    setIsEditing(false);
+    props.setIsTitleUpdating(!props.isTitleUpdating);
+  }
+
   return (
     <>
       <div 
@@ -155,10 +168,18 @@ const TodoItem = (props: Props) => {
           `}
         ref={todoItemRef}>
           <div>
-              <h3 className={props.h3TextStyling}>{props.title}</h3>
+              {isEditing?<input className={props.h3TextStyling+' bg-gray-500'} type='text' autoFocus value={tempTitle} onChange={(e) => setTempTitle(e.currentTarget.value)} onKeyUp={(e) => {
+                if (e.code === "Enter") {
+                  updateTitle(e.currentTarget.value, props.index);
+                }
+              }}></input>:<h3 className={props.h3TextStyling}>{props.title}</h3>}
               <h4 className={props.h4TextStyling}>{props.type}</h4>
           </div>
-          <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => props.deleteTodoItem(props.id)}><Trash2 className='hover:stroke-rose-600'/></button>
+          
+          <div>
+            <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => setIsEditing(true)}><Pencil/></button>
+            <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => props.deleteTodoItem(props.id)}><Trash2 className='hover:stroke-rose-600'/></button>
+          </div>
           {(closestEdge && !dragging) && <DropIndicator edge={closestEdge} gap='12px'/>}
       </div>
     </>
