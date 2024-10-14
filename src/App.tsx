@@ -2,46 +2,54 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import TodoBoard from './components/Todo-Board';
 
-const defaultData : {id:string, title: string, type: string}[] = [
+const defaultData : {id:string, title: string, type: string, description: string}[] = [
   {
     id: "todo1",
     title: "Create Todo List",
     type: "Todo",
+    description: "",
   },
   {
     id: "todo2",
     title: "Learn Pragmatic Drag and Drop",
     type: "Todo",
+    description: "",
   },
   {
     id: "todo3",
     title: "Create Calculator App",
     type: "Completed",
+    description: "",
   },
   {
     id: "todo4",
     title: "Learn Tailwind CSS",
     type: "Todo",
+    description: "",
   },
   {
     id: "todo5",
     title: "Add a Completed List",
     type: "Completed",
+    description: "",
   },
   {
     id: "todo6",
     title: "Style the Todo List",
     type: "Completed",
+    description: "",
   },
   {
     id: "todo7",
     title: "Add a Todo Counter",
     type: "Completed",
+    description: "",
   },
   {
     id: "todo8",
     title: "Add Sorting",
     type: "Todo",
+    description: "",
   }
 ];
 
@@ -50,7 +58,7 @@ const todoTypes: string[] = ["Todo", "Completed"];
 
 function App() {
   const testData = false;
-  const [data, setData] = useState<{id: string, title: string, type: string,}[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
+  const [data, setData] = useState<{id: string, title: string, type: string}[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
   const [todoId, setTodoId] = useState<number>(testData?defaultData.length:JSON.parse(localStorage.getItem('todoId') || '{}'));
   const [todoLists, setTodoLists] = useState<string[]>(testData?todoTypes:JSON.parse(localStorage.getItem('todoLists') || '{}'));
   const [todoListId, setTodoListId] = useState<number>(testData?todoTypes.length:JSON.parse(localStorage.getItem('todoListId') || '{}'));
