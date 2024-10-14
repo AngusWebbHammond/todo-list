@@ -137,11 +137,31 @@ const TodoList = (props: Props) => {
         ref={todoListRef}>
             {/* Todo List Header */}
             <div>
-                <TodoListTitle setData={props.setData} setIsTitleUpdating={props.setIsTitleUpdating} isTitleUpdating={props.isTitleUpdating} todoLists={props.todoLists} setTodoLists={props.setTodoLists} index={props.index} todoTitle={props.todoTitle} h1TextStyling={props.h1TextStyling} data={props.data} deleteTodoItemList={props.deleteTodoItemList}/>
+                <TodoListTitle 
+                    setData={props.setData} 
+                    setIsTitleUpdating={props.setIsTitleUpdating} 
+                    isTitleUpdating={props.isTitleUpdating} 
+                    todoLists={props.todoLists} 
+                    setTodoLists={props.setTodoLists} 
+                    index={props.index} 
+                    todoTitle={props.todoTitle} 
+                    h1TextStyling={props.h1TextStyling} 
+                    data={props.data} 
+                    deleteTodoItemList={props.deleteTodoItemList}/>
                 {/* Todo List Contents */}
                 <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[43rem] flex flex-col overflow-auto p-3 gap-3'>
                     {props.data.filter((item) => item.type === props.todoTitle).map((todoItemDict: TodoType) => (
-                        <TodoItem isTitleUpdating={props.isTitleUpdating} setIsTitleUpdating={props.setIsTitleUpdating} index={props.data.findIndex((item) => item.id === todoItemDict.id)} todoItemDict={todoItemDict} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={todoItemDict.id} data={props.data} setData={props.setData}/>
+                        <TodoItem 
+                            isTitleUpdating={props.isTitleUpdating} 
+                            setIsTitleUpdating={props.setIsTitleUpdating} 
+                            index={props.data.findIndex((item) => item.id === todoItemDict.id)} 
+                            todoItemDict={todoItemDict} 
+                            h3TextStyling={props.h3TextStyling} 
+                            h4TextStyling={props.h4TextStyling} 
+                            deleteTodoItem={props.deleteTodoItem} 
+                            key={todoItemDict.id} 
+                            data={props.data} 
+                            setData={props.setData}/>
                     ))}
                 </div>
             </div>

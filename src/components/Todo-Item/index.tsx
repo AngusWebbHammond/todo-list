@@ -154,17 +154,27 @@ const TodoItem = (props: Props) => {
           `}
         ref={todoItemRef}>
           <div>
-              {isEditing?<input className={props.h3TextStyling+' bg-gray-500'} type='text' autoFocus value={tempTitle} onChange={(e) => setTempTitle(e.currentTarget.value)} onKeyUp={(e) => {
-                if (e.code === "Enter") {
-                  updateTitle(e.currentTarget.value, props.index);
-                }
+              {isEditing?<input 
+                className={props.h3TextStyling+' bg-gray-500'} 
+                type='text' 
+                autoFocus 
+                value={tempTitle} 
+                onChange={(e) => setTempTitle(e.currentTarget.value)} 
+                onKeyUp={(e) => {
+                  if (e.code === "Enter") {
+                    updateTitle(e.currentTarget.value, props.index);
+                  }
               }}></input>:<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
               <h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>
           </div>
           
           <div>
-            <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => setIsEditing(true)}><Pencil/></button>
-            <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => props.deleteTodoItem(props.todoItemDict.id)}><Trash2 className='hover:stroke-rose-600'/></button>
+            <button 
+              className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
+              onClick={() => setIsEditing(true)}><Pencil/></button>
+            <button 
+              className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
+              onClick={() => props.deleteTodoItem(props.todoItemDict.id)}><Trash2 className='hover:stroke-rose-600'/></button>
           </div>
           {(closestEdge && !dragging) && <DropIndicator edge={closestEdge} gap='12px'/>}
       </div>

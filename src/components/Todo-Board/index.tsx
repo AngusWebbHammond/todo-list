@@ -22,9 +22,27 @@ const TodoBoard = (props: Props) => {
   return (
     <div className='flex flex-row w-4/5 overflow-auto p-3 gap-3'>
         {props.todoLists.map((todoTitle: string, index: number) => 
-            <TodoList index={index} isTitleUpdating={props.isTitleUpdating} setIsTitleUpdating={props.setIsTitleUpdating} setTodoLists={props.setTodoLists} todoLists={props.todoLists} todoTitle={todoTitle} h1TextStyling={props.h1TextStyling} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} data={props.data} setData={props.setData} addNewTodo={props.addNewTodo} deleteTodoItem={props.deleteTodoItem} deleteTodoItemList={props.deleteTodoItemList} key={todoTitle}/>
+            <TodoList 
+              index={index} 
+              isTitleUpdating={props.isTitleUpdating} 
+              setIsTitleUpdating={props.setIsTitleUpdating} 
+              setTodoLists={props.setTodoLists} 
+              todoLists={props.todoLists} 
+              todoTitle={todoTitle} 
+              h1TextStyling={props.h1TextStyling} 
+              h3TextStyling={props.h3TextStyling} 
+              h4TextStyling={props.h4TextStyling} 
+              data={props.data} 
+              setData={props.setData} 
+              addNewTodo={props.addNewTodo} 
+              deleteTodoItem={props.deleteTodoItem} 
+              deleteTodoItemList={props.deleteTodoItemList} 
+              key={todoTitle}/>
         )}
-        <AddNewTodoList h3TextStyling={props.h3TextStyling} addNewTodoList={props.addNewTodoList} todoLists={props.todoLists}/>
+        <AddNewTodoList 
+          h3TextStyling={props.h3TextStyling} 
+          addNewTodoList={props.addNewTodoList} 
+          todoLists={props.todoLists}/>
     </div>
   )
 }
