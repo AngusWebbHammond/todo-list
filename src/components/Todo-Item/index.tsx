@@ -12,28 +12,19 @@ import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indi
 import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
 import { flushSync } from 'react-dom';
 import { DropTargetRecord } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
+import { TodoType } from '../../types';
 
 
 type Props = {
-    id: string,
-    title: string,
-    type: string,
-    h3TextStyling: string,
-    h4TextStyling: string,
-    deleteTodoItem: (id: string) => void,
-    index: number,
-    setData: (data: {
-      id: string;
-      title: string;
-      type: string;
-    }[]) => void,
-    data: {
-      id: string;
-      title: string;
-      type: string;
-    }[],
-    isTitleUpdating: boolean,
-    setIsTitleUpdating: (isTitleUpdating: boolean) => void,
+  todoItemDict: TodoType,
+  h3TextStyling: string,
+  h4TextStyling: string,
+  deleteTodoItem: (id: string) => void,
+  index: number,
+  setData: (data: TodoType[]) => void,
+  data: TodoType[],
+  isTitleUpdating: boolean,
+  setIsTitleUpdating: (isTitleUpdating: boolean) => void,
 }
 
 const TodoItem = (props: Props) => {
@@ -42,11 +33,11 @@ const TodoItem = (props: Props) => {
   const [dragging, setDragging] = useState<boolean>(false);
   const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [tempTitle, setTempTitle] = useState<string>(props.title);
+  const [tempTitle, setTempTitle] = useState<string>(props.todoItemDict.title);
 
-  const id: string = props.id;
-  const title: string = props.title;
-  const type: string = props.type;
+  const id: string = props.todoItemDict.id;
+  const title: string = props.todoItemDict.title;
+  const type: string = props.todoItemDict.type;
   const index: number = props.index;
 
   useEffect(() => {
@@ -128,11 +119,7 @@ const TodoItem = (props: Props) => {
             return;
           }
 
-          const tempArr: {
-            id: string;
-            title: string;
-            type: string;
-          }[] = props.data;
+          const tempArr: TodoType[] = props.data;
           tempArr[indexOfSource].type = tempArr[indexOfTarget].type;
           const closestEdgeOfTarget: Edge | null = extractClosestEdge(targetData)
 
@@ -171,13 +158,13 @@ const TodoItem = (props: Props) => {
                 if (e.code === "Enter") {
                   updateTitle(e.currentTarget.value, props.index);
                 }
-              }}></input>:<h3 className={props.h3TextStyling}>{props.title}</h3>}
-              <h4 className={props.h4TextStyling}>{props.type}</h4>
+              }}></input>:<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
+              <h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>
           </div>
           
           <div>
             <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => setIsEditing(true)}><Pencil/></button>
-            <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => props.deleteTodoItem(props.id)}><Trash2 className='hover:stroke-rose-600'/></button>
+            <button className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' onClick={() => props.deleteTodoItem(props.todoItemDict.id)}><Trash2 className='hover:stroke-rose-600'/></button>
           </div>
           {(closestEdge && !dragging) && <DropIndicator edge={closestEdge} gap='12px'/>}
       </div>

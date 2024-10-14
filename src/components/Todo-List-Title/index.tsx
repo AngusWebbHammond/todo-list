@@ -1,13 +1,10 @@
 import { Pencil, Trash2 } from "lucide-react"
 import { useState } from "react";
+import { TodoType } from "../../types";
 
 type Props = {
     todoTitle: string,
-    data: {
-        id: string;
-        title: string;
-        type: string;
-    }[],
+    data: TodoType[],
     h1TextStyling: string,
     deleteTodoItemList: (title: string) => void,
     todoLists: string[],
@@ -15,11 +12,7 @@ type Props = {
     index: number,
     isTitleUpdating: boolean,
     setIsTitleUpdating: (isTitleUpdating: boolean) => void,
-    setData: (data: {
-      id: string;
-      title: string;
-      type: string;
-    }[]) => void,
+    setData: (data: TodoType[]) => void,
 }
 
 const TodoListTitle = (props: Props) => {

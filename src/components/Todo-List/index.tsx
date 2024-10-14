@@ -10,23 +10,16 @@ import DropIndicator from "@atlaskit/pragmatic-drag-and-drop-react-drop-indicato
 import { DropTargetRecord } from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
 import { flushSync } from "react-dom";
 import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
+import { TodoType } from "../../types";
 
 type Props = {
     todoTitle: string,
-    data: {
-        id: string;
-        title: string;
-        type: string;
-    }[],
+    data: TodoType[],
     h1TextStyling: string,
     h3TextStyling: string,
     h4TextStyling: string,
     todoLists: string[],
-    setData: (data: {
-        id: string;
-        title: string;
-        type: string;
-      }[]) => void,
+    setData: (data: TodoType[]) => void,
     addNewTodo: (title: string) => void,
     deleteTodoItem: (id: string) => void,
     deleteTodoItemList: (title: string) => void,
@@ -147,8 +140,8 @@ const TodoList = (props: Props) => {
                 <TodoListTitle setData={props.setData} setIsTitleUpdating={props.setIsTitleUpdating} isTitleUpdating={props.isTitleUpdating} todoLists={props.todoLists} setTodoLists={props.setTodoLists} index={props.index} todoTitle={props.todoTitle} h1TextStyling={props.h1TextStyling} data={props.data} deleteTodoItemList={props.deleteTodoItemList}/>
                 {/* Todo List Contents */}
                 <div className='bg-gray-200 dark:bg-slate-700 min-h-20 h-[43rem] flex flex-col overflow-auto p-3 gap-3'>
-                    {props.data.filter((item) => item.type === props.todoTitle).map(({id, title, type}) => (
-                        <TodoItem isTitleUpdating={props.isTitleUpdating} setIsTitleUpdating={props.setIsTitleUpdating} index={props.data.findIndex((item) => item.id === id)} id={id} title={title} type={type} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={id} data={props.data} setData={props.setData}/>
+                    {props.data.filter((item) => item.type === props.todoTitle).map((todoItemDict: TodoType) => (
+                        <TodoItem isTitleUpdating={props.isTitleUpdating} setIsTitleUpdating={props.setIsTitleUpdating} index={props.data.findIndex((item) => item.id === todoItemDict.id)} todoItemDict={todoItemDict} h3TextStyling={props.h3TextStyling} h4TextStyling={props.h4TextStyling} deleteTodoItem={props.deleteTodoItem} key={todoItemDict.id} data={props.data} setData={props.setData}/>
                     ))}
                 </div>
             </div>

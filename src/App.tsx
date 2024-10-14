@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import TodoBoard from './components/Todo-Board';
 import importData from './assets/default-data.json';
+import type { TodoType } from './types';
 
-const defaultData : {id:string, title: string, type: string, description: string}[] = importData;
+const defaultData : TodoType[] = importData;
 const todoTypes: string[] = ["Todo", "Completed"];
 
 
 function App() {
   const testData = false;
-  const [data, setData] = useState<{id: string, title: string, type: string}[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
+  const [data, setData] = useState<TodoType[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
   const [todoId, setTodoId] = useState<number>(testData?defaultData.length:JSON.parse(localStorage.getItem('todoId') || '{}'));
   const [todoLists, setTodoLists] = useState<string[]>(testData?todoTypes:JSON.parse(localStorage.getItem('todoLists') || '{}'));
   const [todoListId, setTodoListId] = useState<number>(testData?todoTypes.length:JSON.parse(localStorage.getItem('todoListId') || '{}'));
@@ -30,18 +31,19 @@ function App() {
   const h4TextStyling: string = 'text-gray-700 dark:text-gray-300 font-normal text-sm flex justify-left';
 
   function deleteTodoItem (id: string): void {
-    const alteredData: {id:string, title: string, type: string}[] = data.filter((item) => item.id !== id);
+    const alteredData: TodoType[] = data.filter((item) => item.id !== id);
     setData(alteredData);
   }
 
   function addNewTodo (type: string): void {
     const newTodoId = 'todo' + (todoId + 1).toString();
     setTodoId(todoId + 1);
-    const tempTodoList: {id:string, title: string, type: string}[] = data;
+    const tempTodoList: TodoType[] = data;
     tempTodoList.push({
       id: newTodoId,
       title: newTodoId,
       type: type,
+      description: "New Description.",
     });
     setData(tempTodoList);
   }
@@ -54,7 +56,7 @@ function App() {
   }
 
   function deleteTodoItemList (id: string): void {
-    const filteredTodoItems: {id:string, title: string, type: string}[] = data.filter(item => item.type !== id);
+    const filteredTodoItems: TodoType[] = data.filter(item => item.type !== id);
     const tempTodoLists: string[] = todoLists.filter(item => item !== id);
 
     setData(filteredTodoItems);

@@ -9,7 +9,7 @@
       "id": "todo2",
       "title": "Learn Pragmatic Drag and Drop",
       "type": "Todo",
-      "description": ""
+      "description": "Learning how to implement drag and drop."
     },
     {
       "id": "todo3",
@@ -33,7 +33,7 @@
       "id": "todo6",
       "title": "Style the Todo List",
       "type": "Completed",
-      "description": ""
+      "description": "To be done through Tailwind CSS"
     },
     {
       "id": "todo7",
