@@ -155,7 +155,6 @@ const TodoItem = (props: Props) => {
   const updateTitle = (entry: string, index: number) => {
     const tempArr = props.data;
     tempArr[index].title = entry;
-    props.setData(tempArr);
     setIsEditing(false);
     props.setIsTitleUpdating(!props.isTitleUpdating);
   }

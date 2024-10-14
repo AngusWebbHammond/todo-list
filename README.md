@@ -11,12 +11,13 @@ This is a typescript version of my basic-todo-list with more functionality.
   * Todo lists
   * Todo items
 * Persistant Data
-* Renaming of Todo Items
+* Renaming
+  * Todo Items
+  * Todo Lists
 
 ### Future Features
 * Different todo views
   * List of all Todo Items
   * Ordered todo list
 * Sorting
-* Renaming of Todo Lists
 * Todo Descriptions
