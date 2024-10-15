@@ -57,10 +57,10 @@ const TodoListTitle = (props: Props) => {
         <div className="flex flex-row gap-2">
           <button 
             className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
-            onClick={() => setIsEditing(true)}><Pencil/></button>
+            onClick={() => setIsEditing(true)}><Pencil className="stroke-gray-300"/></button>
           <button 
             className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
-            onClick={() => props.deleteTodoItemList(props.todoTitle)}><Trash2 className='hover:stroke-rose-600'/></button>
+            onClick={() => props.deleteTodoItemList(props.todoTitle)}><Trash2 className='stroke-gray-300 hover:stroke-rose-600'/></button>
         </div>
     </div>
   )
