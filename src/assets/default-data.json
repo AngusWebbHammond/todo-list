@@ -3,48 +3,56 @@
       "id": "todo1",
       "title": "Create Todo List",
       "type": "Todo",
-      "description": ""
+      "description": "",
+      "priority": "High"
     },
     {
       "id": "todo2",
       "title": "Learn Pragmatic Drag and Drop",
       "type": "Todo",
-      "description": "Learning how to implement drag and drop."
+      "description": "Learning how to implement drag and drop.",
+      "priority": "High"
     },
     {
       "id": "todo3",
       "title": "Create Calculator App",
       "type": "Completed",
-      "description": ""
+      "description": "",
+      "priority": "Low"
     },
     {
       "id": "todo4",
       "title": "Learn Tailwind CSS",
       "type": "Todo",
-      "description": ""
+      "description": "",
+      "priority": "Low"
     },
     {
       "id": "todo5",
       "title": "Add a Completed List",
       "type": "Completed",
-      "description": ""
+      "description": "",
+      "priority": "Low"
     },
     {
       "id": "todo6",
       "title": "Style the Todo List",
       "type": "Completed",
-      "description": "To be done through Tailwind CSS"
+      "description": "To be done through Tailwind CSS",
+      "priority": "High"
     },
     {
       "id": "todo7",
       "title": "Add a Todo Counter",
       "type": "Completed",
-      "description": ""
+      "description": "",
+      "priority": "Medium"
     },
     {
       "id": "todo8",
       "title": "Add Sorting",
       "type": "Todo",
-      "description": ""
+      "description": "",
+      "priority": "High"
     }
   ]

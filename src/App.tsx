@@ -9,7 +9,7 @@ const todoTypes: string[] = ["Todo", "Completed"];
 
 
 function App() {
-  const testData = false;
+  const testData = true;
   const [data, setData] = useState<TodoType[]>(testData?defaultData:JSON.parse(localStorage.getItem('data') || '{}'));
   const [todoId, setTodoId] = useState<number>(testData?defaultData.length:JSON.parse(localStorage.getItem('todoId') || '{}'));
   const [todoLists, setTodoLists] = useState<string[]>(testData?todoTypes:JSON.parse(localStorage.getItem('todoLists') || '{}'));
@@ -44,6 +44,7 @@ function App() {
       title: newTodoId,
       type: type,
       description: "New Description.",
+      priority: "Low",
     });
     setData(tempTodoList);
   }
