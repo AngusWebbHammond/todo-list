@@ -151,11 +151,11 @@ const TodoItem = (props: Props) => {
   return (
     <>
       <div 
-        className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 py-3 
+        className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 py-3 
           ${dragging?`opacity-50`:`opacity-100`} 
           `}
         ref={todoItemRef}>
-          <div>
+          <div className='flex flex-col w-60 justify-center'>
               {isEditing?<input 
                 className={props.h3TextStyling+' bg-gray-500'} 
                 type='text' 
@@ -180,21 +180,22 @@ const TodoItem = (props: Props) => {
               }}></input>:<h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>}
           </div>
           
-          <div className='flex flex-col gap-2 place-items-end'>
-            <h6 className={`${props.todoItemDict.priority === "Low"?
-              `bg-green-600`:
-              props.todoItemDict.priority === "Medium"?
-              `bg-yellow-600`:
-              `bg-red-600`} text-white rounded-full px-1 text-sm`}>{props.todoItemDict.priority}</h6>
-            <div className='flex flex-row'>
-              <button 
-                className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
-                onClick={() => setIsEditing(true)}><Pencil className='stroke-gray-300'/></button>
-              <button 
-                className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
-                onClick={() => props.deleteTodoItem(props.todoItemDict.id)}><Trash2 className='stroke-gray-300 hover:stroke-rose-600 '/></button>
+          <div className='flex flex-col gap-2'>
+            <div className='flex flex-col items-end gap-2'>
+              <h6 className={`${props.todoItemDict.priority === "Low"?
+                `bg-green-600`:
+                props.todoItemDict.priority === "Medium"?
+                `bg-yellow-600`:
+                `bg-red-600`} text-white rounded-full px-1 text-sm`}>{props.todoItemDict.priority}</h6>
+              <div className='flex flex-row'>
+                <button 
+                  className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
+                  onClick={() => setIsEditing(true)}><Pencil className='stroke-gray-300'/></button>
+                <button 
+                  className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
+                  onClick={() => props.deleteTodoItem(props.todoItemDict.id)}><Trash2 className='stroke-gray-300 hover:stroke-rose-600 '/></button>
+              </div>
             </div>
-            
           </div>
           {(closestEdge && !dragging) && <DropIndicator edge={closestEdge} gap='12px'/>}
       </div>
