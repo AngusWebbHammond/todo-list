@@ -32,6 +32,7 @@ type Props = {
 const TodoList = (props: Props) => {
 
     const todoListRef = useRef<HTMLDivElement | null>(null);
+    const emptyRef = useRef<HTMLDivElement | null>(null); // to be used for an empty todo item for the empty todo lists
     const [dragging, setDragging] = useState<boolean>(false);
     const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
 
@@ -163,6 +164,7 @@ const TodoList = (props: Props) => {
                             data={props.data} 
                             setData={props.setData}/>
                     ))}
+                    {props.data.filter((item) => item.type === props.todoTitle).length === 0 && <div ref={emptyRef}></div>}
                 </div>
             </div>
             <div className="p-3">
