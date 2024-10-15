@@ -34,6 +34,7 @@ const TodoItem = (props: Props) => {
   const [closestEdge, setClosestEdge] = useState<Edge | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [tempTitle, setTempTitle] = useState<string>(props.todoItemDict.title);
+  const [tempDescription, setTempDescription] = useState<string>(props.todoItemDict.description);
 
   const id: string = props.todoItemDict.id;
   const title: string = props.todoItemDict.title;
@@ -139,9 +140,10 @@ const TodoItem = (props: Props) => {
     )
   }, [id, title, type, index, props.data]);
 
-  const updateTitle = (entry: string, index: number) => {
+  const updateTitle = (newTitle: string, newDescription: string, index: number) => {
     const tempArr = props.data;
-    tempArr[index].title = entry;
+    tempArr[index].title = newTitle;
+    tempArr[index].description = newDescription;
     setIsEditing(false);
     props.setIsTitleUpdating(!props.isTitleUpdating);
   }
@@ -149,7 +151,7 @@ const TodoItem = (props: Props) => {
   return (
     <>
       <div 
-        className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 
+        className={`bg-gray-300 dark:bg-slate-600 relative rounded-md gap-2 flex justify-between items-center pl-3 pr-4 min-h-[5rem] ring-2 ring-slate-700 py-3 
           ${dragging?`opacity-50`:`opacity-100`} 
           `}
         ref={todoItemRef}>
@@ -162,10 +164,20 @@ const TodoItem = (props: Props) => {
                 onChange={(e) => setTempTitle(e.currentTarget.value)} 
                 onKeyUp={(e) => {
                   if (e.code === "Enter") {
-                    updateTitle(e.currentTarget.value, props.index);
+                    updateTitle(tempTitle, tempDescription, props.index);
                   }
               }}></input>:<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
-              <h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>
+              {isEditing?<input 
+                className={props.h4TextStyling + ' bg-gray-500 w-64'} 
+                type='text' 
+                autoFocus 
+                value={tempDescription} 
+                onChange={(e) => setTempDescription(e.currentTarget.value)} 
+                onKeyUp={(e) => {
+                  if (e.code === "Enter") {
+                    updateTitle(tempTitle, tempDescription, props.index);
+                  }
+              }}></input>:<h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>}
           </div>
           
           <div>

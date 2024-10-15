@@ -8,13 +8,9 @@ The idea of this is to build the framework to extend to different board types, t
 ### Current Features
 * Multiple todo lists
 * Creation/Deletion of Todos and Todo Lists
-* Drag and Drop
-  * Todo lists
-  * Todo items
+* Drag and Drop of Todos and Todo Lists
 * Persistant Data
-* Renaming
-  * Todo Items
-  * Todo Lists
+* Editing of Todo Titles, Todo List Titles and Descriptions.
 * Todo Descriptions
 
 ### Future Features
