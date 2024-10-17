@@ -40,7 +40,7 @@ const TodoListTitle = (props: Props) => {
         <div className='flex flex-row gap-3 items-center'>
             {isEditing?
             <input 
-              className={props.h1TextStyling+' bg-gray-500'} 
+              className={props.h1TextStyling+' bg-gray-500 w-56'} 
               type='text' 
               autoFocus 
               value={tempTitle} 

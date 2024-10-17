@@ -158,7 +158,7 @@ const TodoItem = (props: Props) => {
         ref={todoItemRef}>
           <div className='flex flex-col w-60 justify-center'>
               {isEditing?<input 
-                className={props.h3TextStyling+' bg-gray-500'} 
+                className={props.h3TextStyling+' bg-gray-500 w-60'} 
                 type='text' 
                 autoFocus 
                 value={tempTitle} 
@@ -168,17 +168,17 @@ const TodoItem = (props: Props) => {
                     updateTitle(tempTitle, tempDescription, props.index);
                   }
               }}></input>:<h3 className={props.h3TextStyling}>{props.todoItemDict.title}</h3>}
-              {isEditing?<input 
-                className={props.h4TextStyling + ' bg-gray-500 w-60'} 
-                type='text' 
-                autoFocus 
-                value={tempDescription} 
-                onChange={(e) => setTempDescription(e.currentTarget.value)} 
+              {isEditing?<textarea 
+                className={'text-gray-700 dark:text-gray-300 font-normal text-sm bg-gray-500 w-60 min-h-24'} 
+                autoFocus
+                value={tempDescription}
+                onChange={(e) => setTempDescription(e.currentTarget.value)}
                 onKeyUp={(e) => {
                   if (e.code === "Enter") {
                     updateTitle(tempTitle, tempDescription, props.index);
-                  }
-              }}></input>:<h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>}
+                  }}}
+              />
+              :<h4 className={props.h4TextStyling}>{props.todoItemDict.description}</h4>}
           </div>
           
           <div className='flex flex-col gap-2'>
