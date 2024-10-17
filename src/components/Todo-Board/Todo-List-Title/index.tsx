@@ -1,4 +1,3 @@
-import { Pencil, Trash2 } from "lucide-react"
 import { useState } from "react";
 import { TodoType } from "../../../types";
 import DeleteButton from "../Delete-Button";

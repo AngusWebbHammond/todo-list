@@ -1,5 +1,4 @@
 import { draggable, dropTargetForElements, monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { Pencil, Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import { 
