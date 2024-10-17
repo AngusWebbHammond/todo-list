@@ -13,6 +13,8 @@ import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/r
 import { flushSync } from 'react-dom';
 import { DropTargetRecord } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { TodoType } from '../../../types';
+import DeleteButton from '../Delete-Button';
+import EditButton from '../Edit-Button';
 
 
 type Props = {
@@ -188,12 +190,8 @@ const TodoItem = (props: Props) => {
                 `bg-yellow-600`:
                 `bg-red-600`} text-white rounded-full px-1 text-sm`}>{props.todoItemDict.priority}</h6>
               <div className='flex flex-row'>
-                <button 
-                  className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
-                  onClick={() => setIsEditing(true)}><Pencil className='stroke-gray-300'/></button>
-                <button 
-                  className='hover:bg-gray-500 dark:hover:bg-slate-500 rounded-full h-7 w-7 flex justify-center items-center' 
-                  onClick={() => props.deleteTodoItem(props.todoItemDict.id)}><Trash2 className='stroke-gray-300 hover:stroke-rose-600 '/></button>
+                <EditButton onClick={setIsEditing}/>
+                <DeleteButton item={props.todoItemDict.id} onClick={props.deleteTodoItem}/>
               </div>
             </div>
           </div>
