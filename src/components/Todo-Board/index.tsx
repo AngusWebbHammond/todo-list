@@ -1,4 +1,4 @@
-import { TodoType } from "../../types";
+import { TodoType } from "../Todo-Component/types";
 import AddNewTodoList from "./Add-New-Todo-List"
 import TodoList from "./Todo-List"
 

@@ -10,7 +10,7 @@ import DropIndicator from "@atlaskit/pragmatic-drag-and-drop-react-drop-indicato
 import { DropTargetRecord } from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
 import { flushSync } from "react-dom";
 import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
-import { TodoType } from "../../../types";
+import { TodoType } from "../../Todo-Component/types";
 
 type Props = {
     todoTitle: string,

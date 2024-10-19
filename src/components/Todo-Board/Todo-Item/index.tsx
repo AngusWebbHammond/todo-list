@@ -11,7 +11,7 @@ import { DropIndicator } from '@atlaskit/pragmatic-drag-and-drop-react-drop-indi
 import { reorderWithEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge';
 import { flushSync } from 'react-dom';
 import { DropTargetRecord } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
-import { TodoType } from '../../../types';
+import { TodoType } from '../../Todo-Component/types';
 import DeleteButton from '../Delete-Button';
 import EditButton from '../Edit-Button';
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import TodoBoard from './components/Todo-Board';
-import importData from './assets/default-data.json';
+import TodoBoard from '../Todo-Board';
+import importData from '../../assets/default-data.json';
 import type { TodoType } from './types';
 
 const defaultData : TodoType[] = importData;
